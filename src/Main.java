@@ -6,6 +6,9 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.util.Arrays.stream;
+import static jdk.vm.ci.sparc.SPARC.o1;
+import static jdk.vm.ci.sparc.SPARC.o2;
 
 
 public class Main {
@@ -39,7 +42,9 @@ public class Main {
         System.out.println(even);
     }
 
+
     //Задача №1
+
 
 
     private static int order (Integer o2, Integer o1){
@@ -55,11 +60,13 @@ public class Main {
             (BiConsumer<? super T, ? super T> minMaxConsumer,
              Comparator<? super T> order,
              Stream<? extends T> stream){
-        Stream<? extends T> min = stream;
-        Stream<? extends T> max = stream;
+        T max = stream(stream.toArray()).max(order(T o2, T o1)).get();
+        T min = stream(stream.toArray()).min(order(T o2, T o1)).get();
         return minMaxConsumer.accept(min, max);
 
     }
+
+
 
 
 }
