@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -11,6 +10,7 @@ import static java.util.Arrays.stream;
 
 
 public class Main {
+
 
 
     private static Integer t2;
@@ -50,16 +50,20 @@ public class Main {
 
 
 
-    public static <T, U> BiConsumer<T, U>  findMinMax
+    public static <T> void findMinMax
             (BiConsumer<? super T, ? super T> minMaxConsumer,
              Comparator<? super T> order,
              Stream<? extends T> stream){
 
-        T max = stream(stream.toArray()).max(order).get();
-        T min = stream(stream.toArray()).min(order).get();
-        return minMaxConsumer.accept(min, max);
+//
+        T min = (T) stream.collect(Collectors.toList()).stream().max(order).get();
+        T max = (T) stream.collect(Collectors.toList()).stream().max(order).get();
 
+
+        minMaxConsumer.accept(min, max);
     }
+
+
 
 
 
