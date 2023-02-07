@@ -6,10 +6,14 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.util.Arrays.stream;
 
 
 public class Main {
 
+
+
+    private static Integer t2;
 
     public static void main(String[] args) {
 
@@ -39,27 +43,29 @@ public class Main {
         System.out.println(even);
     }
 
+
     //Задача №1
 
 
-    private static int order (Integer o2, Integer o1){
-        if (o1 > o2) {
-            return 1;
-        } else if (o2 > o1) {
-            return -1;
-        }
-        return 0;
-    }
 
-    public static <T, U> BiConsumer<T, U>  findMinMax
+
+
+    public static <T> void findMinMax
             (BiConsumer<? super T, ? super T> minMaxConsumer,
              Comparator<? super T> order,
              Stream<? extends T> stream){
-        Stream<? extends T> min = stream;
-        Stream<? extends T> max = stream;
-        return minMaxConsumer.accept(min, max);
 
+        List<T> list = stream.collect(Collectors.toList());
+
+        T min =  list.stream().max(order).orElse(null);
+        T max =  list.stream().min(order).orElse(null);
+
+
+        minMaxConsumer.accept(min, max);
     }
+
+
+
 
 
 }
