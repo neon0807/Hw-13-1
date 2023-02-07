@@ -55,14 +55,14 @@ public class Main {
              Comparator<? super T> order,
              Stream<? extends T> stream){
 
-//
-        T min = (T) stream.collect(Collectors.toList()).stream().max(order).get();
-        T max = (T) stream.collect(Collectors.toList()).stream().max(order).get();
+        List<T> list = stream.collect(Collectors.toList());
+
+        T min =  list.stream().max(order).orElse(null);
+        T max =  list.stream().min(order).orElse(null);
 
 
         minMaxConsumer.accept(min, max);
     }
-
 
 
 
